@@ -1,39 +1,85 @@
 /* Reset & base */
 * {
   margin: 0; padding: 0; box-sizing: border-box;
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Montserrat', sans-serif;
 }
 
 body {
-  background: url('assets/minecraft-bg.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #fff;
-  text-align: center;
+  background: #0a0a0a;
+  color: #eee;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 2rem 1rem;
+  line-height: 1.6;
 }
 
+/* HEADER - Hero Banner */
 header {
-  margin-bottom: 2rem;
-  text-shadow: 2px 2px 4px #000;
+  position: relative;
+  height: 70vh;
+  background: url('assets/minecraft-bg.jpg') center center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #33cc33;
+  overflow: hidden;
+}
+
+header .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1;
+}
+
+.header-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding: 0 1rem;
+  animation: fadeInUp 1s ease forwards;
 }
 
 h1 {
-  font-size: 3rem;
-  color: #33cc33;
+  font-family: 'Press Start 2P', cursive;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  letter-spacing: 4px;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 15px #33cc33;
 }
 
-p {
-  font-size: 1.2rem;
-  color: #ddd;
-  margin-top: 0.5rem;
+header p {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  margin-bottom: 2rem;
+  text-shadow: 0 0 5px #33cc33;
 }
 
+.btn-primary {
+  background: linear-gradient(90deg, #4caf50, #66bb6a);
+  border: none;
+  padding: 0.9rem 2rem;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 30px;
+  box-shadow: 0 0 10px #66bb6a;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #66bb6a, #4caf50);
+  box-shadow: 0 0 20px #4caf50;
+}
+
+/* MAIN CONTENT */
 main {
-  flex-grow: 1;
+  padding: 2rem 1rem 4rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -41,35 +87,100 @@ main {
 }
 
 .card {
-  background: rgba(0,0,0,0.6);
-  border: 3px solid #33cc33;
+  background: #111;
   border-radius: 12px;
+  box-shadow: 0 0 10px rgba(51, 204, 51, 0.6);
   padding: 1.5rem 2rem;
-  width: 300px;
+  width: 320px;
+  color: #ddd;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0 20px #33cc33;
 }
 
 h2 {
   margin-bottom: 1rem;
-  color: #99ff99;
-  font-size: 1.4rem;
+  font-weight: 700;
+  color: #66bb6a;
+  border-bottom: 2px solid #33cc33;
+  padding-bottom: 0.4rem;
 }
 
 ul {
   list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
-a {
+ul li {
+  flex-grow: 1;
+}
+
+.btn-secondary {
+  display: inline-block;
+  background: #222;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
   color: #33cc33;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+  border: 2px solid #33cc33;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-a:hover {
-  text-decoration: underline;
+.btn-secondary:hover {
+  background: #33cc33;
+  color: #111;
 }
 
+/* Server status special style */
+.status-card p#status {
+  font-size: 1.5rem;
+  font-weight: 700;
+  animation: pulseGlow 2s infinite;
+}
+
+/* FOOTER */
 footer {
-  margin-top: 3rem;
+  text-align: center;
+  padding: 1rem;
+  color: #555;
   font-size: 0.9rem;
-  color: #aaa;
+  user-select: none;
 }
+
+/* Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    text-shadow: 0 0 5px #33cc33, 0 0 10px #33cc33;
+  }
+  50% {
+    text-shadow: 0 0 15px #99ff99, 0 0 25px #99ff99;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+  .card {
+    width: 90%;
+  }
+}
+
